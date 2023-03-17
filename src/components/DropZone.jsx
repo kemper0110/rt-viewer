@@ -1,7 +1,6 @@
 import React, {useCallback} from 'react'
 import {useDropzone} from 'react-dropzone'
 import {useFile} from "../contexts/FileContext";
-import * as XLSX from 'xlsx';
 import * as Excel from "exceljs";
 
 const DropZone = () => {
