@@ -9,6 +9,11 @@ const Searcher = () => {
     const {file} = useFile();
     const [data, setData] = useState([]);
     const onClick = id => {
+        const d = [];
+        for(const row of file)
+            if(row['Номер заявки'] == id)
+                d.push(row);
+        setData(d)
     };
     return (
         <>

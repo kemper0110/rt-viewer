@@ -1,7 +1,7 @@
 const StatusTable = ({data}) => {
     return (
         <div>
-            <table className="table table-active">
+            <table className="table table-bordered table-success">
                 <thead>
                 <tr>
                     <td>Номер заявки</td>
@@ -25,9 +25,12 @@ const StatusTable = ({data}) => {
 const Status = ({data}) => {
     return (
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{data['Номер заявки']}</td>
+            <td>{data['Клиент*']}</td>
+            <td>{data['ИНН']}</td>
+            <td>{data['Статус']}</td>
+            <td>{data['Дата входа заявки в статус']}</td>
+            <td>{data['Услуга']}</td>
         </tr>
     )
 }

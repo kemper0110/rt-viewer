@@ -1,6 +1,6 @@
 import {useId, useState} from "react";
 
-const ClientInput = (onClick) => {
+const ClientInput = ({onClick}) => {
     // const inputId = useId();
     const [id, setId] = useState("");
     return (
