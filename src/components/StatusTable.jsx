@@ -1,50 +1,53 @@
 import {makeAutoObservable} from "mobx";
+import {observer} from "mobx-react-lite";
+import {useSearcherStore} from "../contexts/SearcherStoreContext";
 
 export class StatusTableStore {
     data = []
     parent
+
     constructor(parent) {
         this.parent = parent
         makeAutoObservable(this)
     }
+
     setData(data) {
         this.data = data;
     }
 }
 
-const StatusTable = ({store}) => {
+const StatusTable = observer(function StatusTable() {
+    const store = useSearcherStore();
+    const selected = store.columnSelectorStore.selected;
+    const columns = store.columnSelectorStore.columns;
+    const ordered = columns.filter(col => selected.has(col));
     return (
         <div>
             <table className="table table-bordered table-success">
                 <thead>
                 <tr>
-                    <td>Номер заявки</td>
-                    <td>Клиент</td>
-                    <td>ИНН</td>
-                    <td>Статус</td>
-                    <td>Дата входа заявки в статус</td>
-                    <td>Услуга</td>
+                    {
+                        ordered.map(col => <td className='h6' key={col}>{col}</td>)
+                    }
                 </tr>
                 </thead>
                 <tbody>
                 {
-                    store.data.map(row => <Status data={row}/>)
+                    store.statusTableStore.data.map(row => <Status
+                        key={row['Дата входа заявки в статус'] + ' ' + row['Статус']} row={row} columns={ordered}/>)
                 }
                 </tbody>
             </table>
         </div>
     )
-}
+})
 
-const Status = ({data}) => {
+const Status = ({row, columns}) => {
     return (
-        <tr>
-            <td>{data['Номер заявки']}</td>
-            <td>{data['Клиент*']}</td>
-            <td>{data['ИНН']}</td>
-            <td>{data['Статус']}</td>
-            <td>{data['Дата входа заявки в статус']}</td>
-            <td>{data['Услуга']}</td>
+        <tr className='h6'>
+            {
+                columns.map(col => <td key={col}>{row[col]}</td>)
+            }
         </tr>
     )
 }

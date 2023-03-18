@@ -7,12 +7,12 @@ export function getUnchangedRequests(rows, N) {
 
     }
 }
-
-
 export function findByRequest(rows, request) {
-    const d = [];
-    for(const row of rows)
-        if(row['Номер заявки'] == request)
-            d.push(row);
-    return d;
+    return findByParam(rows, 'Номер заявки', request)
+}
+export function findByInn(rows, inn) {
+    return findByParam(rows, 'ИНН', inn)
+}
+export function findByParam(rows, paramName, paramValue) {
+    return rows.filter(row => row[paramName] === paramValue);
 }

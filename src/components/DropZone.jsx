@@ -15,8 +15,11 @@ const DropZone = () => {
                 console.time("loading")
                 const wb = XLSX.read(reader.result, {type: 'binary'})
                 const ws = wb.Sheets[wb.SheetNames[0]]
-                const rows = XLSX.utils.sheet_to_json(ws, { header: 1 })
-                const columns = rows.shift();
+                // , { header: 1 }
+                const rows = XLSX.utils.sheet_to_json(ws, {raw: false})
+                const sample = rows[0];
+                console.log(sample);
+                const columns = Object.keys(sample);
                 setFile({rows, columns});
                 console.timeEnd("loading");
             }
@@ -28,7 +31,7 @@ const DropZone = () => {
     return (
         <div {...getRootProps()}>
             <input {...getInputProps()} />
-            <p>Перетащите файл формата xslx</p>
+            <p>Перетащите файл формата xlsx</p>
         </div>
     )
 };

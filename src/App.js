@@ -9,7 +9,7 @@ function App() {
         <div className="App">
             <BrowserRouter>
                 <Routes>
-                    <Route exact path="/" element={<Navigate replace to="/upload" />} />
+                    <Route exact path="/" element={<Navigate replace to="/upload"/>} />
                     <Route exact path="/upload" element={<Input/>}/>
                     <Route exact path="/contents" element={<Contents/>}/>
                     <Route exact path="/history/:searchParam" element={<History/>}/>
