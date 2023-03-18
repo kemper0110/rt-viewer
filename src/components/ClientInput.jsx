@@ -1,10 +1,11 @@
-import {useId, useState} from "react";
-import {makeAutoObservable, observe} from "mobx";
+import {makeAutoObservable} from "mobx";
 import {observer} from "mobx-react-lite";
 import {useSearcherStore} from "../contexts/SearcherStoreContext";
+import SearchParamList from "./SearchParamList";
 
 export class ClientInputStore {
-    id = ""
+    paramName
+    paramValue
     onSubmit
     parent
     constructor(parent, onSubmit) {
@@ -12,32 +13,22 @@ export class ClientInputStore {
         this.parent = parent
         makeAutoObservable(this)
     }
-    setId(id) {
-        this.id = id
+    setParamName(paramName) {
+        this.paramName = paramName;
+    }
+    setParamValue(paramValue) {
+        this.paramValue = paramValue;
     }
 }
 
 // TODO param
 const ClientInput = observer(function ClientInput() {
-    const numId = useId();
-    const innId = useId();
     const {clientInputStore: store} = useSearcherStore();
     return (
         <>
-            <input type='text' placeholder='Номер заявки' value={store.id}
-                   onChange={e => store.setId(e.target.value)}/>
-            <div className="form-check">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" id={numId}/>
-                <label className="form-check-label" htmlFor={numId}>
-                    Номер заявки
-                </label>
-            </div>
-            <div className="form-check">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" id={innId}/>
-                <label className="form-check-label" htmlFor={innId}>
-                    ИНН
-                </label>
-            </div>
+            <input type='text' placeholder={store.paramName} value={store.id}
+                   onChange={e => store.setParamValue(e.target.value)}/>
+            <SearchParamList onChoice={param => store.setParamName(param)}/>
             <button onClick={() => store.onSubmit()}>Найти</button>
         </>
     )
