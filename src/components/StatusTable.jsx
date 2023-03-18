@@ -1,4 +1,18 @@
-const StatusTable = ({data}) => {
+import {makeAutoObservable} from "mobx";
+
+export class StatusTableStore {
+    data = []
+    parent
+    constructor(parent) {
+        this.parent = parent
+        makeAutoObservable(this)
+    }
+    setData(data) {
+        this.data = data;
+    }
+}
+
+const StatusTable = ({store}) => {
     return (
         <div>
             <table className="table table-bordered table-success">
@@ -14,7 +28,7 @@ const StatusTable = ({data}) => {
                 </thead>
                 <tbody>
                 {
-                    data && data.map(row => <Status data={row}/>)
+                    store.data.map(row => <Status data={row}/>)
                 }
                 </tbody>
             </table>

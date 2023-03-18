@@ -14,9 +14,9 @@ export default function Input() {
 
     return(
         <div>
-            <h1>{file ? "File loaded" : "Waiting for file"}</h1>
+            <h1>{file ? "Файл загружен" : "Ожидание файла"}</h1>
             <DropZone/>
-            <button className="btn btn-primary" onClick={onLoad}>Load</button>
+            <button className="btn btn-primary" onClick={onLoad}>Далее</button>
         </div>
     );
 }

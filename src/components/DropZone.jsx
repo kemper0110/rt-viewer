@@ -15,7 +15,9 @@ const DropZone = () => {
                 console.time("loading")
                 const wb = XLSX.read(reader.result, {type: 'binary'})
                 const ws = wb.Sheets[wb.SheetNames[0]]
-                setFile(XLSX.utils.sheet_to_json(ws));
+                const rows = XLSX.utils.sheet_to_json(ws, { header: 1 })
+                const columns = rows.shift();
+                setFile({rows, columns});
                 console.timeEnd("loading");
             }
             reader.readAsArrayBuffer(file);
