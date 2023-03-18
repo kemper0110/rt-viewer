@@ -1,5 +1,5 @@
 import {useId} from "react";
-import {makeAutoObservable, observable} from "mobx";
+import {makeAutoObservable} from "mobx";
 import {observer} from "mobx-react-lite";
 
 

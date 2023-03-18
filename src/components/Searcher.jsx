@@ -1,12 +1,11 @@
 import ClientInput, {ClientInputStore} from "./ClientInput";
 import StatusTable, {StatusTableStore} from "./StatusTable";
-import {useEffect, useRef, useState} from "react";
+import {useRef} from "react";
 import {useFile} from "../contexts/FileContext";
-import {Workbook} from "exceljs";
 import ColumnSelector, {ColumnSelectorStore} from "./ColumnSelector";
 import {makeAutoObservable} from "mobx";
 import {observer} from "mobx-react-lite";
-import {findByRequest} from "../utils/algo";
+import {findByParam} from "../utils/algo";
 
 class SearcherStore {
     columnSelectorStore
@@ -21,8 +20,12 @@ class SearcherStore {
     }
 
     onSubmit() {
-        const id = this.clientInputStore.id;
-        const data = findByRequest(id);
+        const paramName = this.clientInputStore.paramName;
+        const paramValue = this.clientInputStore.paramValue;
+        if (paramValue === "Номер заявки")
+            navigate(`history/${paramValue}`);
+
+        const data = findByParam(rows, paramName, paramValue);
         this.statusTableStore.setData(data);
     }
 }

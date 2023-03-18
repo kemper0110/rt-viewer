@@ -1,4 +1,3 @@
-
 // Ищет заявки, в которых не было изменений статуса более N дней
 export function getUnchangedRequests(rows, N) {
     const ids_last_req = new Map();
@@ -9,10 +8,6 @@ export function getUnchangedRequests(rows, N) {
 }
 
 
-export function findByRequest(rows, request) {
-    const d = [];
-    for(const row of rows)
-        if(row['Номер заявки'] == request)
-            d.push(row);
-    return d;
+export function findByParam(rows, paramName, paramValue) {
+    return rows.filter(row => row[paramName] === paramValue);
 }

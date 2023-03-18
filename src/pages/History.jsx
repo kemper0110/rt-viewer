@@ -2,11 +2,11 @@ import {useFile} from "../contexts/FileContext";
 import {useParams} from "react-router";
 
 export default function History() {
-    const searchParam = useParams();
+    const {rt_id} = useParams();
     const file = useFile();
 
     console.log(file);
-    console.log("Searching by " + searchParam);
+    console.log(`Searching by ${rt_id}`);
     return (
         <div>A</div>
     );
