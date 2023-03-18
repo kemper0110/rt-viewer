@@ -2,7 +2,7 @@ import {ColumnSelectorStore} from "../components/ColumnSelector";
 import {ClientInputStore} from "../components/ClientInput";
 import {StatusTableStore} from "../components/StatusTable";
 import {makeAutoObservable} from "mobx";
-import {findByRequest} from "../utils/algo";
+import {findByParam, findByRequest} from "../utils/algo";
 import {createContext, useContext, useRef} from "react";
 import {useFile} from "./FileContext";
 
@@ -23,9 +23,11 @@ class SearcherStore {
 
     onSubmit() {
         const id = this.clientInputStore.id;
-        console.log(id)
-        console.log(this.file.rows)
-        const data = findByRequest(this.file.rows, id);
+        console.log(id);
+        console.log(this.file.rows);
+        const name = 'Номер заявки';
+        // TODO param name from clientInputStore
+        const data = findByParam(this.file.rows, name, id);
         console.log(data);
         this.statusTableStore.setData(data);
     }
