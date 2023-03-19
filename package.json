@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.2.3",
     "exceljs": "^4.3.0",
+    "fuse.js": "^6.6.2",
     "mobx": "^6.8.0",
     "mobx-react-lite": "^3.4.3",
     "react": "^18.2.0",
@@ -42,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "sass": "^1.59.3"
   }
 }

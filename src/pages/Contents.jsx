@@ -7,7 +7,6 @@ export default function Contents() {
     console.log("File: ", file);
     return (
         <>
-            <div>Main</div>
             <Searcher/>
         </>
     );

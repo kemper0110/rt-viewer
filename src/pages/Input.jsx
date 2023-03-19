@@ -10,13 +10,11 @@ export default function Input() {
         if (file)
             navigate("/contents");
         // else error popup
-    }
+    };
 
     return(
         <div>
-            <h1>{file ? "Файл загружен" : "Ожидание файла"}</h1>
-            <DropZone/>
-            <button className="btn btn-primary" onClick={onLoad}>Далее</button>
+            <DropZone onLoad={onLoad}/>
         </div>
     );
 }

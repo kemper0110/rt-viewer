@@ -1,0 +1,33 @@
+@import "bootstrap";
+
+$mynewcolor:#850337;
+$primarycolor:#7749F8;
+$clickedprimarycolor: #FF4F12;
+$white: #FFFFFF;
+
+.btn-angry {
+    @include button-variant(
+                    $mynewcolor, darken($mynewcolor, 7.5%), $white,
+                    lighten($mynewcolor,5%), lighten($mynewcolor, 10%), $white
+    );
+}
+
+.btn-primary {
+    @include button-variant(
+                    $primarycolor, darken($primarycolor, 7.5%), $white,
+                    lighten($primarycolor,5%), lighten($primarycolor, 10%), $white
+                    lighten($clickedprimarycolor,5%), lighten($clickedprimarycolor, 10%), $white
+    );
+}
+
+.btn-primary:hover, .btn-primary:active {
+  color: white;
+}
+
+.btn-outline-primary {
+  @include button-outline-variant($primarycolor, #222222, $white, $primarycolor);
+}
+
+.btn-outline-primary2 {
+  @include button-outline-variant($mynewcolor, #222222, lighten($mynewcolor,5%), $mynewcolor);
+}

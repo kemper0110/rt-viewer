@@ -1,22 +1,56 @@
 import {useId} from "react";
+import {observer} from "mobx-react-lite";
+import {useSearcherStore} from "../contexts/SearcherStoreContext";
+import ColumnSelector from "./ColumnSelector";
 
-export default function SearchParamList({params, onChoice, defaultValue}) {
+const SearchParamList = observer(function SearchParamList() {
+    const {clientInputStore: store} = useSearcherStore();
+    const choiced = store.paramName;
     const rt_id = useId();
     const inn_id = useId();
     return (
-        <>
-            <div className="form-check">
-                <input className="form-check-input active" onClick={() => onChoice('Номер заявки')} type="radio" name="flexRadioDefault" id={rt_id}/>
-                <label className="form-check-label" htmlFor={rt_id}>
-                    Номер заявки
-                </label>
+        <div className='d-flex justify-content-center align-content-center flex-row m-1'>
+            {/*<div className='d-inline-block m-1'>*/}
+                <Param isSelected={choiced === 'Номер заявки'} name={'Номер заявки'} onChoice={name => store.setParamName(name)}/>
+            {/*</div>*/}
+            {/*<div className='d-inline-block m-1'>*/}
+                <Param isSelected={choiced === 'ИНН'} name={'ИНН'} onChoice={name => store.setParamName(name)}/>
+            {/*</div>*/}
+            {/*<div className='d-inline-block m-1'>*/}
+                <Param isSelected={choiced === 'Клиент*'} name={'Клиент*'} onChoice={name => store.setParamName(name)}/>
+            {/*</div>*/}
+            {/*<div className='d-inline-block m-1'>*/}
+                <Param isSelected={choiced === 'Нарушение SLA'} name={'Нарушение SLA'} onChoice={name => store.setParamName(name)}/>
+            {/*</div>*/}
+            {/*<div className='d-inline-block m-1'>*/}
+            <div className='form-check'>
+                <ColumnSelector/>
             </div>
-            <div className="form-check">
-                <input className="form-check-input" onClick={() => onChoice('Номер заявки')} type="radio" name="flexRadioDefault" id={inn_id}/>
-                <label className="form-check-label" htmlFor={inn_id}>
-                    ИНН
-                </label>
-            </div>
-        </>
+            {/*</div>*/}
+        </div>
     );
+});
+
+export default SearchParamList;
+
+const Param = ({isSelected, onChoice, name}) => {
+    const id = useId();
+    return (
+        <div className="form-check">
+            <input type="checkbox" className="btn-check" id={id} autoComplete="off" name='params'
+                   onChange={() => onChoice(name)}
+                   checked={isSelected}
+            />
+            <label className="btn btn-primary" htmlFor={id}>
+                {name}
+            </label>
+            {/*<input className={"form-check-input" + isSelected ? 'active' : ''} onClick={() => onChoice(name)}*/}
+            {/*       type="radio" name="flexRadioDefault" id={id}*/}
+            {/*       checked={isSelected}*/}
+            {/*/>*/}
+            {/*<label className="form-check-label m-1" htmlFor={id}>*/}
+            {/*    {name}*/}
+            {/*</label>*/}
+        </div>
+    )
 }
